@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "/home/oksana/proga"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"ostream": "cpp"
+		}
+	}
+}
