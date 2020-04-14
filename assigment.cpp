@@ -15,8 +15,6 @@ void AssigmentProblemSolver::SetMatrix(Matrix matrix) {
 AssigmentProblemSolver::Assigment AssigmentProblemSolver::Solve(SolverType type) {
     if (type == SolverType::Greedy) {
         return GreedySolve();
-    } else if (type == SolverType::Hungarian) {
-        return HungarianSolve();
     }
     throw std::runtime_error("Unknown type of solver");
 }
@@ -53,8 +51,4 @@ AssigmentProblemSolver::Assigment AssigmentProblemSolver::GreedySolve() {
         }
     }
     return result;
-}
-
-AssigmentProblemSolver::Assigment AssigmentProblemSolver::HungarianSolve() {
-    // TODO    
 }

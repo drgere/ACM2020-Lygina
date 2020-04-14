@@ -2,8 +2,7 @@
 #include <vector>
 
 enum class SolverType {
-    Greedy,
-    Hungarian,
+    Greedy
 };
 
 class AssigmentProblemSolver {
@@ -24,9 +23,6 @@ public:
 private:
     // Solve using greedy algorithm
     Assigment GreedySolve();
-
-    // Solve using Hungarian algorithm
-    Assigment HungarianSolve();
 
     Matrix matrix_;
 };

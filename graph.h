@@ -25,6 +25,13 @@ public:
     // Find approximate maximal cycle cover using assigment problem solver 
     std::vector<std::vector<size_t>> GetMaximumCycleCover();
 
+    // Find exact longest path in the graph
+    std::vector<size_t> GetLongestPath();
+
+    // Find exact longest path from s in O(n^2 2^n)
+    // https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm
+    int GetLongestPathFrom(size_t s, std::vector<size_t>& path);
+
 private:
     AdjacencyMatrix adjacency_;
 };
