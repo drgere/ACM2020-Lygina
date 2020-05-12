@@ -67,18 +67,27 @@ std::string SuperstringSolver::Exact() {
 }
 
 int SuperstringSolver::Overlap(const std::string& lhs, const std::string& rhs) {
+    // Воспользуемся алгоритмом КМП для строки rhs # lhs
+    // Тогда по определению, префикс функция от всей строки -- это
+    // длина наибольшоего суффикса строки lhs, которая совпадает с префиксом
+    // строки rhs, то мы и ищем
     if (lhs == rhs) {
         return 0;
     }
-    int res = 0;
-    for (size_t len = 1; len < lhs.size(); ++len) {
-        std::string_view suff{lhs.c_str() + lhs.size() - len, len};
-        std::string_view pref{rhs.c_str(), len};
-        if (suff == pref) {
-            res = len;
+    // 0 не может встретиться в строке, значит, он -- хороший разделитель
+    std::string str = rhs + '\0' + lhs;
+    std::vector<int> pi(str.size());
+    for (size_t i = 1; i < str.size(); ++i) {
+        size_t j = pi[i-1];
+        while (j > 0 && str[i] != str[j]) {
+            j = pi[j-1];
         }
+        if (str[i] == str[j]) {
+            j++;
+        }
+        pi[i] = j;
     }
-    return res;
+    return pi.back();
 }
 
 void SuperstringSolver::Filter() {

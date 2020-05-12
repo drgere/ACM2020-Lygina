@@ -102,3 +102,42 @@ TEST(SuperstringTest, ExactCorrectnessTest) {
     std::string result = solver.Exact();
     CheckCorrectness(data, result);
 }
+
+TEST(SuperstringTest, EmptyTest) {
+    SuperstringSolver solver({});
+    std::string result = solver.Exact();
+    EXPECT_EQ(result.size(), 0);
+    result = solver.Approximation4();
+    EXPECT_EQ(result.size(), 0);
+}
+
+TEST(SuperstringTest, IntersectionFilterTest) {
+    // Также тестирует крайний случай 1 строки
+    std::vector<std::string> data = {
+        "aaa", "aa", "a"
+    };
+    SuperstringSolver solver(data);
+    std::string resultExact = solver.Exact();
+    std::string resultApprox = solver.Approximation4();
+
+    CheckCorrectness(data, resultExact);
+    CheckCorrectness(data, resultApprox);
+
+    EXPECT_EQ(resultExact.size(), 3);
+    EXPECT_EQ(resultApprox.size(), 3);
+}
+
+TEST(SuperstringTest, ExtraLagreExactTest) {
+    std::vector<std::string>  data(100);
+    for (int i = 0; i < 100; ++i) {
+        data[i] = std::to_string(i);
+    }
+    SuperstringSolver solver(data);
+    std::string resultExact = solver.Exact();
+    std::string resultApprox = solver.Approximation4();
+
+    CheckCorrectness(data, resultExact);
+    CheckCorrectness(data, resultApprox);
+    // Показывает, что для точного решения запустился плохой алгоритм
+    EXPECT_LE(resultApprox.size(), resultExact.size());
+}
